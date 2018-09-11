@@ -1,5 +1,5 @@
 <header class="fixed-top">
-  tête
+  <app-header></app-header>
 </header>
 
 <main>
@@ -9,18 +9,18 @@
 
   <aside>
     <div class="scroller">
-      menu de navigation
+      <app-nav></app-nav>
     </div>
   </aside>
 
   <div class="page">
 
     <div class="contents">
-      bazar
+      <router-outlet></router-outlet>
     </div>
 
     <footer>
-      pieds
+      <app-footer></app-footer>
     </footer>
   </div>
 
