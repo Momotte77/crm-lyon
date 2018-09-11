@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  title = 'mon super CRM perso de la mort qui tue';
+  title = 'super CRM';
   constructor() { }
 
   ngOnInit() {
