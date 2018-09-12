@@ -1,7 +1,7 @@
 <td>{{presta.typePresta}}</td>
 <td>{{presta.client}}</td>
 <td>{{presta.nbJours}}</td>
-<td>{{presta.tjmHT | currency:"€"}}</td>
-<td>{{presta | total| currency:"€"}}</td>
-<td>{{presta | total:presta.tauxTva| currency:"€"}}</td>
+<td>{{presta.tjmHT | localCurrency}}</td>
+<td>{{presta | total | currency:"€"}}</td>
+<td>{{presta | total:presta.tauxTva | currency:"€"}}</td>
 <td>{{presta.state}}</td>
