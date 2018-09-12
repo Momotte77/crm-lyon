@@ -10,6 +10,7 @@ import { Prestation } from '../../../shared/models/presatation-model';
 export class ListPrestationComponent implements OnInit {
   public collection: Prestation[];
   public headers: string[];
+  boutonAddPresta = {libelle: 'Ajouter prestation', route: '/prestations/add'};
 
   constructor(private prestationsService: PrestationsService) {}
 
@@ -24,5 +25,6 @@ export class ListPrestationComponent implements OnInit {
       'Total TTC',
       'Action'
     ];
+
   }
 }

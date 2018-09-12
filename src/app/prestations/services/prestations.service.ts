@@ -27,7 +27,7 @@ export class PrestationsService {
 
   // update presta
   update(presta: Prestation, state?: State): void {
-    const prestaToUpdate = {...presta};
+    const prestaToUpdate = { ...presta };
     presta.state = state;
     // appel api
   }
@@ -35,4 +35,7 @@ export class PrestationsService {
   // delete presta
 
   // add presta
+  add(presta: Prestation): void {
+    this.collection.push(presta);
+  }
 }

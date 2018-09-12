@@ -4,9 +4,10 @@ import { TableauComponent } from './components/tableau/tableau.component';
 import { TotalPipe } from './pipes/total.pipe';
 import { LocalCurrencyPipe } from './pipes/local-currency.pipe';
 import { StateDirective } from './directives/state.directive';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   declarations: [TableauComponent, TotalPipe, LocalCurrencyPipe, StateDirective],
   exports: [TableauComponent, TotalPipe, LocalCurrencyPipe, StateDirective]
 })

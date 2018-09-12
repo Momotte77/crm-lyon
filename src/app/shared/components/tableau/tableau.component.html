@@ -11,4 +11,6 @@
         </tbody>
       </table>
     </div>
+    <ng-content select="div"></ng-content>
+    <a [routerLink]="[lien.route]" routerLinkActive="router-link-active" >{{lien.libelle}} (exemple avec Input)</a>
   </div>

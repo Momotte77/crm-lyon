@@ -1,0 +1,31 @@
+<form #form="ngForm" (ngSubmit)="process()">
+  <div class="form-group">
+    <label for="typePresta">Type Prestation</label>
+    <input [(ngModel)]="newItem.typePresta" type="text" name="typePresta" class="form-control" id="typePresta" required
+      minlength="4">
+    {{newItem.typePresta}}
+  </div>
+  <div class="form-group">
+    <label for="client">Client</label>
+    <input [(ngModel)]="newItem.client" type="text" name="client" class="form-control" id="client">
+  </div>
+  <div class="form-group">
+    <label for="nbJours">Nombre de jours</label>
+    <input [(ngModel)]="newItem.nbJours" type="text" name="nbJours" class="form-control" id="nbJours">
+  </div>
+  <div class="form-group">
+    <label for="TjmHt">TJM HT</label>
+    <input [(ngModel)]="newItem.tjmHT" type="text" name="TjmHt" class="form-control" id="TjmHt">
+  </div>
+  <div class="form-group">
+    <label for="TauxTva">Taux TVA</label>
+    <input [(ngModel)]="newItem.tauxTva" type="text" name="TauxTva" class="form-control" id="TauxTva">
+  </div>
+  <div class="form-group">
+    <label for="state">Etat</label>
+    <select [(ngModel)]="newItem.state" class="form-control" name="state" id="state">
+      <option [value]="item" *ngFor="let item of states">{{item}}</option>
+    </select>
+  </div>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Valider</button>
+</form>

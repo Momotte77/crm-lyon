@@ -10,6 +10,8 @@ export class TableauComponent implements OnInit {
   collection: Object[];
   @Input()
   headers: string[];
+  @Input()
+  lien: {route: string, libelle:  string};
 
   constructor() {
     // console.log(this.headers);
