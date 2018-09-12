@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   title = 'super CRM';
-  constructor() { }
+  open = false;
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public toogle(): void {
+    this.open = !this.open;
   }
-
 }
