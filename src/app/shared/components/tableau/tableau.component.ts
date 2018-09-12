@@ -12,7 +12,7 @@ export class TableauComponent implements OnInit {
   headers: string[];
 
   constructor() {
-    console.log(this.headers);
+    // console.log(this.headers);
   }
 
   ngOnInit() {}

@@ -6,7 +6,7 @@ export class Prestation implements PrestationInterface {
   typePresta: string;
   client: string;
   nbJours: number;
-  tauxTva: number;
+  tauxTva: 20;
   tjmHT: number;
   state = State.EN_ATTENTE;
 
@@ -17,6 +17,7 @@ export class Prestation implements PrestationInterface {
   }
 
   totalHT(): number {
+    console.log('totalHT called');
     if (!this.tjmHT || !this.nbJours) {
       return 0;
     }
@@ -24,13 +25,15 @@ export class Prestation implements PrestationInterface {
   }
 
   totalTTC(tva?: number): number {
-    const totalHT = this.totalHT();
+    console.log('totalTTC called');
     if (!this.tauxTva) {
-      this.tauxTva = 0;
+      this.tauxTva = 20;
     }
+    const totalHT = this.totalHT();
+
     if (!tva) {
       tva = this.tauxTva;
-    } else if (tva >= 0) {
+    } else if (tva < 0) {
       tva = 0;
     }
     return totalHT + (tva * totalHT) / 100;
