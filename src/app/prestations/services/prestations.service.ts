@@ -16,13 +16,13 @@ import { map } from 'rxjs/operators';
 export class PrestationsService {
   private prestationCollection: AngularFirestoreCollection<Prestation>;
 
-  private _collection: Observable<Prestation[]>;
+  private _collection$: Observable<Prestation[]>;
   private itemsCollection: AngularFirestoreCollection<Prestation>;
 
   constructor(private afs: AngularFirestore) {
     // this.collection = FAKE_COLLECTION;
     this.itemsCollection = afs.collection<Prestation>('prestations');
-    this.collection = this.itemsCollection.valueChanges().pipe(
+    this.collection$ = this.itemsCollection.valueChanges().pipe(
       map(data => {
         const tab = [];
         data.forEach(res => {
@@ -34,28 +34,56 @@ export class PrestationsService {
   }
 
   // get Collection
-  get collection(): Observable<Prestation[]> {
-    return this._collection;
+  get collection$(): Observable<Prestation[]> {
+    return this._collection$;
   }
 
   // set Collection
-  set collection(col: Observable<Prestation[]>) {
-    this._collection = col;
+  set collection$(col: Observable<Prestation[]>) {
+    this._collection$ = col;
   }
 
   // get presta by id
 
   // update presta
-  update(presta: Prestation, state?: State): void {
-    const prestaToUpdate = { ...presta };
-    presta.state = state;
-    // appel api
-  }
+  // update(presta: Prestation, state?: State): void {
+  //  const prestaToUpdate = { ...presta };
+  //  presta.state = state;
+  //  // appel api
+  // }
 
   // delete presta
 
   // add presta
-  add(presta: Prestation): void {
-    // this.collection.push(presta);
+  // add(presta: Prestation): void {
+  //  // this.collection.push(presta);
+  // }
+
+  addPrestation(item: Prestation): Promise<any> {
+    const id = this.afs.createId();
+    const prestation = { id, ...item };
+    return this.itemsCollection
+      .doc(id)
+      .set(prestation)
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  updatePrestation(item: Prestation, option?: State): Promise<any> {
+    const presta = { ...item };
+    if (option) {
+      presta.state = option;
+    }
+    return this.itemsCollection
+      .doc(item.id)
+      .update(presta)
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  getPrestation(id: string): Observable<Prestation> {
+    return this.itemsCollection.doc<Prestation>(id).valueChanges();
   }
 }

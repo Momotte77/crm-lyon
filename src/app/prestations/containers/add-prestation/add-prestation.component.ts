@@ -15,7 +15,9 @@ export class AddPrestationComponent implements OnInit {
 
   add(presta: Prestation): void {
     console.log(presta);
-    this.prestationService.add(presta);
-    this.router.navigate(['/prestations']);
+    this.prestationService.addPrestation(presta).then(() => {
+      this.router.navigate(['/prestations']);
+    });
+
   }
 }

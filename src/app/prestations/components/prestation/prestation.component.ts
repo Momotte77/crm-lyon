@@ -21,6 +21,6 @@ export class PrestationComponent implements OnInit {
     // console.log(e.target.value);
     const state = e.target.value;
     this.presta.state = state; // TODO : supprimer apres fait code update bdd
-    this.prestationService.update(this.presta, state);
+    this.prestationService.updatePrestation(this.presta, state);
   }
 }

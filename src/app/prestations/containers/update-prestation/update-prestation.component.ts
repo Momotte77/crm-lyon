@@ -17,8 +17,9 @@ export class UpdatePrestationComponent implements OnInit {
 
   update(presta: Prestation): void {
     console.log(presta);
-    this.prestationService.update(presta);
-    this.router.navigate(['/prestations']);
+    this.prestationService.updatePrestation(presta).then(() => {
+      this.router.navigate(['/prestations']);
+    });
   }
 
 }
