@@ -5,11 +5,13 @@
 <td>{{presta | total | currency:"€"}}</td>
 <td>{{presta | total:presta.tauxTva | currency:"€"}}</td>
 <td [appState]="presta.state">
-  <select (change)=update($event)>
+  <select (change)="update($event)" (click)="$event.stopPropagation()">
     <option [value]="presta.state">{{presta.state}}</option>
     <ng-container *ngFor="let state of states">
       <option *ngIf="state !== presta.state" [value]="state">{{state}}</option>
     </ng-container>
   </select>
 </td>
-<td><a [routerLink]="['update']" routerLinkActive="router-link-active">Modifier</a></td>
+<td>
+  <button type="button" class="btn btn-outline-danger" (click)="$event.stopPropagation(); delete()">X</button>
+</td>

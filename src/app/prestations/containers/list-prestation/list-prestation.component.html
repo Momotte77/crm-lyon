@@ -1,8 +1,11 @@
 <app-tableau [headers]="headers" [lien]="boutonAddPresta">
   <ng-container *ngFor="let item of collection$ | async">
-    <app-prestation [presta]="item"></app-prestation>
+    <app-prestation (click)="edit(item)" [presta]="item"></app-prestation>
   </ng-container>
   <div>
     <a [routerLink]="['add']" routerLinkActive="router-link-active">Add prestation(conseillé)(exemple avec ng-content)</a>
   </div>
 </app-tableau>
+<div *ngIf="message$ | async; let message">
+  {{message}}
+</div>

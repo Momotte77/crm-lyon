@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import { State } from '../../../shared/enum/state.enum';
 import { Prestation } from '../../../shared/models/presatation-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-reactive',
@@ -17,7 +18,7 @@ export class FormReactiveComponent implements OnInit {
   @Output()
   nItem: EventEmitter<Prestation> = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     if (this.presta) {
@@ -51,5 +52,9 @@ export class FormReactiveComponent implements OnInit {
 
   public isError(formName: string): boolean {
     return this.form.get(formName).invalid && this.form.get(formName).touched;
+  }
+
+  redirect(): void {
+    this.router.navigate(['/prestations']);
   }
 }

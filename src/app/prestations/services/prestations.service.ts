@@ -7,7 +7,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -18,6 +18,8 @@ export class PrestationsService {
 
   private _collection$: Observable<Prestation[]>;
   private itemsCollection: AngularFirestoreCollection<Prestation>;
+
+  public message$: Subject<string> = new Subject;
 
   constructor(private afs: AngularFirestore) {
     // this.collection = FAKE_COLLECTION;
@@ -78,6 +80,15 @@ export class PrestationsService {
     return this.itemsCollection
       .doc(item.id)
       .update(presta)
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  deletePrestation(presta: Prestation): Promise<any> {
+    return this.itemsCollection
+      .doc(presta.id)
+      .delete()
       .catch(e => {
         console.log(e);
       });

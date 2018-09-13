@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { State } from '../../../shared/enum/state.enum';
 import { Prestation } from '../../../shared/models/presatation-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +13,7 @@ export class FormComponent implements OnInit {
   newItem = new Prestation();
   @Output() nItem: EventEmitter<Prestation> = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,5 +21,9 @@ export class FormComponent implements OnInit {
   public process(): void {
     // console.log(this.newItem);
     this.nItem.emit(this.newItem);
+  }
+
+  redirect(): void {
+    this.router.navigate(['/prestations']);
   }
 }

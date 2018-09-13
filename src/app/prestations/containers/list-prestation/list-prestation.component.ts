@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PrestationsService } from '../../services/prestations.service';
 import { Prestation } from '../../../shared/models/presatation-model';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-prestation',
@@ -13,12 +14,13 @@ export class ListPrestationComponent implements OnInit, OnDestroy {
   public collection$: Observable<Prestation[]>;
   // private sub: Subscription;
   public headers: string[];
+  message$: Subject<string>;
   boutonAddPresta = {
     libelle: 'Ajouter prestation',
     route: '/prestations/add'
   };
 
-  constructor(private prestationsService: PrestationsService) {}
+  constructor(private prestationsService: PrestationsService, private router: Router) {}
 
   ngOnInit() {
     this.collection$ = this.prestationsService.collection$;
@@ -26,6 +28,7 @@ export class ListPrestationComponent implements OnInit, OnDestroy {
     //  console.log(data);
     //  this.collection = data;
     // });
+    this.message$ = this.prestationsService.message$;
     this.headers = [
       'Type',
       'Client',
@@ -40,5 +43,9 @@ export class ListPrestationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // this.sub.unsubscribe();
+  }
+
+  public edit(item: Prestation): void {
+    this.router.navigate(['update', item.id]);
   }
 }
