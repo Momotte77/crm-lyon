@@ -3,23 +3,43 @@ import { Prestation } from '../../shared/models/presatation-model';
 import { FAKE_COLLECTION } from './fakeCollection';
 import { State } from '../../shared/enum/state.enum';
 
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PrestationsService {
-  private _collection: Prestation[];
+  private prestationCollection: AngularFirestoreCollection<Prestation>;
 
-  constructor() {
-    this.collection = FAKE_COLLECTION;
+  private _collection: Observable<Prestation[]>;
+  private itemsCollection: AngularFirestoreCollection<Prestation>;
+
+  constructor(private afs: AngularFirestore) {
+    // this.collection = FAKE_COLLECTION;
+    this.itemsCollection = afs.collection<Prestation>('prestations');
+    this.collection = this.itemsCollection.valueChanges().pipe(
+      map(data => {
+        const tab = [];
+        data.forEach(res => {
+          tab.push(new Prestation(res));
+        });
+        return tab;
+      })
+    );
   }
 
   // get Collection
-  get collection(): Prestation[] {
+  get collection(): Observable<Prestation[]> {
     return this._collection;
   }
 
   // set Collection
-  set collection(col: Prestation[]) {
+  set collection(col: Observable<Prestation[]>) {
     this._collection = col;
   }
 
@@ -36,6 +56,6 @@ export class PrestationsService {
 
   // add presta
   add(presta: Prestation): void {
-    this.collection.push(presta);
+    // this.collection.push(presta);
   }
 }

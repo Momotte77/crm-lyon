@@ -1,9 +1,9 @@
 <form #form="ngForm" (ngSubmit)="process()">
   <div class="form-group">
     <label for="typePresta">Type Prestation</label>
-    <input [(ngModel)]="newItem.typePresta" type="text" name="typePresta" class="form-control" id="typePresta" required
+    <input [(ngModel)]="newItem.typePresta" #nom="ngModel" type="text" name="typePresta" class="form-control" id="typePresta" required
       minlength="4">
-    {{newItem.typePresta}}
+    <div class="alert alert-danger" *ngIf="nom.invalid && nom.touched">Champ invalide</div>
   </div>
   <div class="form-group">
     <label for="client">Client</label>

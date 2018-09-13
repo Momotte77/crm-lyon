@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PrestationsService } from '../../services/prestations.service';
 import { Prestation } from '../../../shared/models/presatation-model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-prestation',
@@ -9,13 +10,21 @@ import { Prestation } from '../../../shared/models/presatation-model';
 })
 export class ListPrestationComponent implements OnInit {
   public collection: Prestation[];
+  // public collection: Observable<Prestation[]>;
   public headers: string[];
-  boutonAddPresta = {libelle: 'Ajouter prestation', route: '/prestations/add'};
+  boutonAddPresta = {
+    libelle: 'Ajouter prestation',
+    route: '/prestations/add'
+  };
 
   constructor(private prestationsService: PrestationsService) {}
 
   ngOnInit() {
-    this.collection = this.prestationsService.collection;
+    // this.collection = this.prestationsService.collection;this
+    this.prestationsService.collection.subscribe(data => {
+      console.log(data);
+      this.collection = data;
+    });
     this.headers = [
       'Type',
       'Client',
@@ -23,8 +32,8 @@ export class ListPrestationComponent implements OnInit {
       'TJM HT',
       'Total HT',
       'Total TTC',
-      'Action'
+      'Etat',
+      'Actions'
     ];
-
   }
 }
