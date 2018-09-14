@@ -7,7 +7,7 @@ import { UpdatePrestationComponent } from './containers/update-prestation/update
 const appRoutes: Routes = [
   { path: '', component: ListPrestationComponent },
   { path: 'add', component: AddPrestationComponent },
-  { path: 'update', component: UpdatePrestationComponent }
+  { path: 'update/:id', component: UpdatePrestationComponent }
 ];
 
 @NgModule({

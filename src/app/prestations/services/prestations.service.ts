@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class PrestationsService {
 
   public message$: Subject<string> = new Subject;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private http: HttpClient) {
     // this.collection = FAKE_COLLECTION;
     this.itemsCollection = afs.collection<Prestation>('prestations');
     this.collection$ = this.itemsCollection.valueChanges().pipe(
@@ -70,6 +71,7 @@ export class PrestationsService {
       .catch(e => {
         console.log(e);
       });
+      // return this.http.post('urlapi/prestation',item);
   }
 
   updatePrestation(item: Prestation, option?: State): Promise<any> {
@@ -96,5 +98,6 @@ export class PrestationsService {
 
   getPrestation(id: string): Observable<Prestation> {
     return this.itemsCollection.doc<Prestation>(id).valueChanges();
+    // return this.http.get(`urlapi/prestation/${id}`);
   }
 }

@@ -46,6 +46,6 @@ export class ListPrestationComponent implements OnInit, OnDestroy {
   }
 
   public edit(item: Prestation): void {
-    this.router.navigate(['update', item.id]);
+    this.router.navigate(['prestations/update', item.id]);
   }
 }
