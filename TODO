@@ -1,12 +1,12 @@
 
 Todo:
   ✔ créer une route pour edit avec id et un resolve @done(18-09-14 11:01)
-  ☐ creation du service resolve
-    ☐ récuperer l'id passé par la route
-    ☐ injecter PrestationService
-    ☐ dans Methode resolve, appeler getPrestation de PrestationService en lui passant l'id
-    ☐ return le resultat de la requête si date recupere
-    ☐ sinon return false et route .navigate vers liste des prestations
+  ✔ creation du service resolve @done(18-09-14 12:29)
+    ✔ récuperer l'id passé par la route @done(18-09-14 12:29)
+    ✔ injecter PrestationService @done(18-09-14 12:29)
+    ✔ dans Methode resolve, appeler getPrestation de PrestationService en lui passant l'id @done(18-09-14 12:29)
+    ✔ return le resultat de la requête si datA recupere @done(18-09-14 12:30)
+    ✔ sinon return false et route .navigate vers liste des prestations @done(18-09-14 12:30)
   ☐ sur updateComponenet.ts
     ☐ recuperer dans router l'objet que resolve a retourne
     ☐ passer cet objet a app-form via un @Input()

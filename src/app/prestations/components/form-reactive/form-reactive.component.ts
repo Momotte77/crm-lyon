@@ -1,5 +1,10 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControlName
+} from '@angular/forms';
 import { State } from '../../../shared/enum/state.enum';
 import { Prestation } from '../../../shared/models/presatation-model';
 import { Router } from '@angular/router';
@@ -21,6 +26,7 @@ export class FormReactiveComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
+    // console.log(this.presta);
     if (this.presta) {
       this.initPrestation = this.presta;
     }
@@ -30,24 +36,37 @@ export class FormReactiveComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       typePresta: [
-        this.initPrestation.typePresta,
+        this.presta ? this.presta.typePresta : this.initPrestation.typePresta,
         Validators.compose([Validators.required, Validators.minLength(4)])
       ],
       client: [
-        this.initPrestation.client,
+        this.presta ? this.presta.client : this.initPrestation.client,
         Validators.compose([Validators.required, Validators.minLength(4)])
       ],
-      nbJours: [this.initPrestation.nbJours],
-      tjmHT: [this.initPrestation.tjmHT],
-      tauxTva: [this.initPrestation.tauxTva],
-      state: [this.initPrestation.state]
+      nbJours: [
+        this.presta ? this.presta.nbJours : this.initPrestation.nbJours
+      ],
+      tjmHT: [this.presta ? this.presta.tjmHT : this.initPrestation.tjmHT],
+      tauxTva: [
+        this.presta ? this.presta.tauxTva : this.initPrestation.tauxTva
+      ],
+      state: [this.presta ? this.presta.state : this.initPrestation.state]
     });
   }
 
+  private getItem(item: Prestation) {
+    const data = this.form.value;
+    if (!this.presta) {
+      return data;
+    }
+    const id = this.presta.id;
+    return { id, ...data };
+  }
+
   public process(): void {
-    const item = new Prestation(this.form.value);
-    console.log(item);
-    this.nItem.emit(item);
+    // const item = new Prestation(this.form.value);
+    // console.log(item);
+    this.nItem.emit(this.getItem(this.form.value));
   }
 
   public isError(formName: string): boolean {
